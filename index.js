@@ -22,6 +22,10 @@ async function run() {
         // console.log('database connected')
         const database = client.db("smartWatche");
         const productCollection = database.collection("products");
+        const orderCollection = database.collection("orders");
+        // const manageAllOrder = database.collection("manageOrders");
+        const usersCollection = database.collection("users");
+
         // get all data
         app.get('/products', async (req, res) => {
             const cursor = productCollection.find({});
@@ -57,6 +61,91 @@ async function run() {
 
 
         })
+
+        // order place
+        app.post('/orders', async (req, res) => {
+            const order = req.body;
+            const result = await orderCollection.insertOne(order);
+            // console.log(result)
+            res.json(result)
+            
+        })
+
+        // user show all orders
+        app.get('/orders', async (req, res) => {
+            const email = req.query.email;
+            const query = { email: email };
+            // console.log(query);
+            const cursor = orderCollection.find(query);
+             // show all user orders
+            // const cursor = orderCollection.find({});
+            const orders = await cursor.toArray();
+            res.json(orders);
+            
+        })
+    //    user data
+
+        // grt user data 
+        app.get('/users/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email: email };
+            const user = await usersCollection.findOne(query);
+            let isAdmin = false;
+            if (user?.role === 'admin') {
+                isAdmin = true;
+            }
+            res.json({ admin: isAdmin });
+        })
+        // 
+
+        app.post('/users', async (req, res) => {
+            const user = req.body;
+            const result = await usersCollection.insertOne(user);
+            console.log(result);
+            res.json(result);
+            
+        })
+
+        // 
+        app.put('/users', async (req, res) => {
+            const user = req.body;
+            const filter = { email: user.email };
+            const option = { upsert: true };
+            const updateDoc = { $set: user };
+            const result = await usersCollection.updateOne(filter, updateDoc, option);
+            res.json(result);
+
+            
+        })
+        // update user
+        app.put('/users/admin', async (req, res) => {
+            const user = req.body;
+            console.log('put', user);
+            const filter = { email: user.email };
+            const updateDoc = { $set: { role: 'admin' } };
+            const result = await usersCollection.updateOne(filter, updateDoc);
+            res.json(result);
+
+
+
+            
+        })
+        
+        // admin manage orders
+        // app.post('/manageOrders', async (req, res) => {
+        //     const orders = req.body;
+        //     const result = await manageAllOrder.insertOne(orders);
+        //     console.log(result)
+        //     res.json(result)
+
+        // })
+        // app.get('/manageOrders', async (req, res) => {
+        //     const cursor = manageAllOrder.find({});
+        //     const orders = await cursor.toArray();
+        //     res.json(orders);
+
+        // })
+
 
 
     }
