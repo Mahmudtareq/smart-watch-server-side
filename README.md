@@ -1,6 +1,6 @@
 # Getting Started with Create React App CONFIDENT COUNT
  # Client side Private github Link
-This project Clint side GitHub Link [Create React App](https://github.com/programming-hero-web-course-4/niche-website-server-side-Mahmudtareq).
+This project Server side GitHub Link [Create React App](https://github.com/programming-hero-web-course-4/niche-website-server-side-Mahmudtareq).
 
 ## `Firebase Deployment`
 See Live Project Link [deployment](https://smart-watches-8176d.web.app/) for more information
