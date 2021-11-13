@@ -35,11 +35,9 @@ async function run() {
         // get single service
         app.get('/products/:id', async (req, res) => {
             const id = req.params.id;
-            // console.log('product find');
             const query = { _id: ObjectId(id) };
             const product = await productCollection.findOne(query);
             res.json(product);
-
         })
 
         // post
@@ -48,8 +46,6 @@ async function run() {
             const result = await productCollection.insertOne(product);
             // console.log(result);
             res.json(result)
-            // res.send('post hittet');
-
         })
 
         // delete api
@@ -75,8 +71,6 @@ async function run() {
             res.json(orders);
             
         })
-
-
 
         // order place
         app.post('/orders', async (req, res) => {
@@ -109,14 +103,11 @@ async function run() {
             }
             res.json({ admin: isAdmin });
         })
-        // 
-
         app.post('/users', async (req, res) => {
             const user = req.body;
             const result = await usersCollection.insertOne(user);
             console.log(result);
             res.json(result);
-            
         })
 
         app.put('/users', async (req, res) => {
