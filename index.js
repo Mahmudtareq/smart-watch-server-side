@@ -92,7 +92,7 @@ async function run() {
             
         })
     
-        // grt user data 
+        // get user data from database
         app.get('/users/:email', async (req, res) => {
             const email = req.params.email;
             const query = { email: email };
@@ -133,6 +133,7 @@ async function run() {
         
     }
     finally {
+        // await client.close();
         // await client.close();
     }
 }
