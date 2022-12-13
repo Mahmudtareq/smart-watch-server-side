@@ -1,7 +1,7 @@
 {
   "name": "smart-watch-server-side",
   "version": "1.0.0",
-  "description": "",
+  "description": "This project Server side GitHub Link [Create React App](https://github.com/programming-hero-web-course-4/niche-website-server-side-Mahmudtareq).",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
