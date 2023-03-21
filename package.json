@@ -25,5 +25,6 @@
     "express": "^4.17.1",
     "mongodb": "^4.1.4",
     "stripe": "^8.193.0"
-  }
+  },
+  "devDependencies": {}
 }
